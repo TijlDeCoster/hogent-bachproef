@@ -14,12 +14,27 @@
 
 \section{Inleiding}%
 \label{sec:inleiding}
+Deze bachelorproef richt zich op het analyseren en visualiseren van klantpaden binnen de lokaal draaiende Genesys-omgeving van Proximus. Dit richt zich specifiek op de interne klant van Proximus die de Genesys-omgeving beheert.
 
-Telecomoperatoren zoals Proximus verwerken dagelijks een zeer groot volume aan klanteninteracties via verschillende contact platformen.
-Om deze gesprekken efficiënt te routen en self-service mogelijk te maken maakt Proximus gebruik van een lokaal draaiende Genesys-omgeving. Deze architectuur bestaat uit historisch gegroeide (interactive voice Responses)IVR-structuren en verschillende Genesys chat structuren.
-Hoewel deze flows essentieel zijn voor de operationele werking blijkt zowel uit academische literatuur \autocite{Ellway2016} als vanuit Proximus dat organisaties met dergelijke systemen onvoldoene inzicht hebben in hoe klanten deze paden daadwerkelijk doorlopen.
+De centrale probleemstelling is dat Proximus ondanks uitgebreide logging in Spark onvoldoende inzicht heeft in hoe klanten deze flows daadwerkelijk doorlopen. De bestaande logbestanden zijn operationeel van aard en niet ontworpen om automatisch de volledig flowstructuur te reconstrueren. Hierdoor blijft onduidelijkheid waar klanten afhaken, waar fouten optreden en welke stappen structureel inefficiënt zijn wat ook bevestigd word in academische literatuur over IVR-analyse en process mining \autocite{Ellway2016,Antonio2024}.
 
-Onderzoek naar IVR-drop-off analyses en process mining toont aan dat bedrijven vaak niet weten waar klanten afhaken, waar transacties mislukken of welke stappen structureel problemen veroorzaken 
+\paragraph{Centrale onderzoeksvraag}
+Hoe kan een reproduceerbare methode ontwikkeld worden om alle mogelijke paden binnen de lokale Genesys-flows van Proximus te visualiseren en te analyseren, zodat drop-off punten, foutpaden en inefficiënte stappen kunnen worden geïdentificeerd?
+
+\paragraph{Onderzoeksdoelstelling}
+Het doel van dit onderzoek is het ontwikkelen van een proof-of-concept dat Spark-logs omzet in een visuele en analyseerbare representatie van Genesys-flows. Dit prototype moet inzicht bieden in de volledige flowstructuur. Zodat hiervan verbeter punten uit kunnen gehaald worden en klanttransacties kunnen worden getraceerd binnen de verwachte flow.
+
+\paragraph{Deelvragen probleemdomein}
+\begin{itemize}
+  \item Welke soorten interacties en events worden door Proximus gelogd in Spark en hoe verhouden deze zich tot de onderliggende Genesys-flows?
+  \item Welke datakwaliteitsproblemen (zoals ontbrekende events, inconsistenties of timingverschillen) bemoeilijken het reconstrueren van klantpaden?
+\end{itemize}
+
+\paragraph{Deelvragen oplossingsdomein}
+\begin{itemize}
+  \item Hoe kunnen Spark-logs gestructureerd en verwerkt worden om flowstappen en klanttransacties automatisch te identificeren?
+  \item Welke analysetechnieken of algoritmen zijn geschikt om alle mogelijke paden binnen een Genesys-flow te reconstrueren?
+\end{itemize}
 %---------- Stand van zaken ---------------------------------------------------
 
 
@@ -48,19 +63,39 @@ Je mag deze sectie nog verder onderverdelen in subsecties als dit de structuur v
 %---------- Methodologie ------------------------------------------------------
 \section{Methodologie}%
 \label{sec:methodologie}
+Dit onderzoek wolgt een experimentele en data-gedreven aanpak. Het doel is om een reproduceerbare methode te ontwikkelen die Spark-logs omzet in een visuele en analyseerbare representatie van Genesys-flows. De gekozen onderzoekstechniek zijn afgestemd op de onderzoeksvragen en garanderen objectieve, meetbare en technisch onderbouwde resultaten. De methodologie bestaat uit vier hoofdfasen: literatuurstudie, dataverwerking, flowreconstructie en validatie.
 
-Hier beschrijf je hoe je van plan bent het onderzoek te voeren. Welke onderzoekstechniek ga je toepassen om elk van je onderzoeksvragen te beantwoorden? Gebruik je hiervoor literatuurstudie, interviews met belanghebbenden (bv.~voor requirements-analyse), experimenten, simulaties, vergelijkende studie, risico-analyse, PoC, \ldots?
+\paragraph{Literatuurstudie}
+Om de vragen in het probleemdomein te beantwoorden ordt een gerichte literatuurstudie uitgevoerd naar:
+\begin{itemize}
+  \item IVR-analyse en drop-offdetectie
+  \item process mining en padreconstructie
+  \item log-analyse in contactcenteromgevingen
+  \item grafmodellen voor flowvisualisatie
+\end{itemize}
+Deze stude dient om bestaande methoden, besprekingen en relevante concepten te identificeren. De literatuur vormt de theoretische basis voor de ontwerpkeuzes in het proof-of-concept.
+\paragraph{Analyse en voorbereiding van Spark-logs}
+Om te bepalen welke delen van de logs nodig zijn voor de flowreconstructie, worden de Spark-logs van Proximus geanlyseerd
 
-Valt je onderwerp onder één van de typische soorten bachelorproeven die besproken zijn in de lessen Research Methods (bv.\ vergelijkende studie of risico-analyse)? Zorg er dan ook voor dat we duidelijk de verschillende stappen terug vinden die we verwachten in dit soort onderzoek!
 
-Vermijd onderzoekstechnieken die geen objectieve, meetbare resultaten kunnen opleveren. Enquêtes, bijvoorbeeld, zijn voor een bachelorproef informatica meestal \textbf{niet geschikt}. De antwoorden zijn eerder meningen dan feiten en in de praktijk blijkt het ook bijzonder moeilijk om voldoende respondenten te vinden. Studenten die een enquête willen voeren, hebben meestal ook geen goede definitie van de populatie, waardoor ook niet kan aangetoond worden dat eventuele resultaten representatief zijn.
+\paragraph{Ontwikkeling van een flowreconstructiemethode (Proof-of-Concept)}
+Voor de vragen in het oplossingsdomein wordt een proof-of-concept intwikkeld dat:
+\begin{itemize}
+  \item Spark-logs structureert tot flowstappen
+  \item transities tussen stappen detecteert
+  \item alle mogelijke paden binnen een flow reconstrueert
+  \item deze paden visualiseert via grafmodellen
+\end{itemize}
+Onderzoekstechnieken:
+\begin{itemize}
+  \item algoritmen-ontwerp
+  \item grafmodellering (bijv. NetworkX)
+  \item padextractie en frequentie-analyse
+\end{itemize}
+Deze fase vormt het technische hart van de bachelorproef en vereist programmerwerk, data-engineering en modelvalidatie.
 
-Uit dit onderdeel moet duidelijk naar voor komen dat je bachelorproef ook technisch voldoen\-de diepgang zal bevatten. Het zou niet kloppen als een bachelorproef informatica ook door bv.\ een student marketing zou kunnen uitgevoerd worden.
-
-Je beschrijft ook al welke tools (hardware, software, diensten, \ldots) je denkt hiervoor te gebruiken of te ontwikkelen.
-
-Probeer ook een tijdschatting te maken. Hoe lang zal je met elke fase van je onderzoek bezig zijn en wat zijn de concrete \emph{deliverables} in elke fase?
-
+\paragraph{Validatie}
+De ontwikkelde methode wordt geëvalueerd op basis van correctheid, compleetheid en bruikbaarheid.
 %---------- Verwachte resultaten ----------------------------------------------
 \section{Verwacht resultaat, conclusie}%
 \label{sec:verwachte_resultaten}
