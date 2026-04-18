@@ -14,7 +14,7 @@
 
 \section{Inleiding}%
 \label{sec:inleiding}
-Binnen Proximus ondersteund de Genesys-omgeving de afhandeling van klantinteracties in het callcenter en communicatie platform. Deze interacties verlopen via meerde kanalen en kunnen volgens uiteenlopende scenario's evolueren, afhankelijk van de gegevens die een klant aanlevert of opgehaald worden intern. Hierdoor ontstaat een complex proces waarin vergelijkbare gesprekken niet noodzakelijk dezelfde stappen doorlopen. Dit maakt het waardevol om de volledige conversatiestroom systematisch in kaart te brengen en te analyseren.
+Binnen Proximus ondersteund de Genesys-omgeving de afhandeling van klantinteracties in de omnichannel omgeving (telefoon, chat, berichtplatform). Deze interacties verlopen via meerde kanalen en kunnen volgens uiteenlopende scenario's evolueren, afhankelijk van de gegevens die een klant aanlevert of opgehaald worden intern. Hierdoor ontstaat een complex proces waarin vergelijkbare gesprekken niet noodzakelijk dezelfde stappen doorlopen. Dit maakt het waardevol om de volledige conversatiestroom systematisch in kaart te brengen en te analyseren.
 
 Hoewel Proximus uitgebreide logging verzamelt in Splunk is het vandaag niet vanzelfsprekend om deze data te vertalen naar een heldere overzicht van de volledige interacties. De beschikbare logbestanden bevatten wel veel informatie over afzondelijke uitvoeringsstappen maar zijn operationeel van aard en niet ontworpen om automatisch de volledige flowstructuur te reconstrueren. Daardoor blijft ondeuidelijk waar klanten afhaken, waar fouten optreden en welke stappen structureel inefficiënt. Een probleem dat ook wordt bevestigd in academische litartuur over IVR-analyse en process mining \autocite{Ellway2016,Antonio2024}. Dit onderzoek vertrekt daarom vanuit de vraag hoe zulke interacties beter zichtbaar en interpreteerbaar kunnen worden gemaakt.
 
@@ -42,6 +42,13 @@ Het doel van dit onderzoek is het ontwikkelen van een proof-of-concept dat Splun
 \section{Literatuurstudie}%
 \label{sec:literatuurstudie}
 
+Moderne contactcenters evolueren naar complexe omnichannelomgevingen waarin klantinteracties plaatsvinden via verschillende kanalen zoals chat, berichten en telefonie. Deze interacties verlopen niet altijd volgens vooraf gedefinieerde lineaire processen maar worden gekenmerkt door een hoge mate van variabiliteit. Volgens \textcite{Ellway2016} kan deze variabiliteit leiden tot inefficiënties binnen de interne werking van contactcenters bijvoorbeeld door foutive doorverwijzingen of onverwachte interactiestromen. Dit toont aan dat de feitelijke uitvoering van klantinteracties vaak afwijkt van het ontworpen proces.
+
+Daarnaast speelt klantgedrag een belangrijke rol in het verloop van interacties. \textcite{Antonio2024} beschrijven het fenomeen van "silent abandonment" waarbij klanten een interactie verlaten zonder expliciete afsluiting. Dit maakt het moeilijk om op basis van ruwe eventdata correct te bepalen waar en waarom klanten afhaken. Dergelijke situaties komen niet enkel voor in telefonie maar ook in tekstgebaseerde communicatiekanalen waar gebruikers eenvoudig een gesprk kunnen verlaten zonder duidelijke indicatie.
+
+Om inzicht te krijgen in deze complexe en dynamische interacties biedt process mining een relevante analysemethode. Volgens \textcite{vanDerAalst2016} maakt process mining het mogelijk om op basis van event logs de werkelijke processtromen te recontrueren en te analyseren. Hierdoor kunnen zowel standaardprocessen als afwijkende paden en inefficiënties worden geïdentificeerd. Deze benadering is bijzonder nuttig in omgevingen waar grote hoeveelheden interactiedata beschikbaar zijn.
+
+De toepassing van dergelijke technieken binnen omnichannel contactcenters brengt echter bijkomende uitdagingen met zich mee. Door de hoge variabiliteit in interactiepaden en het ontbreken van expliciete processtructuren is het moeilijk om eenduidige en interpreteerbare modellen te reconstrueren \autocite{Ellway2016, vanDerAalst2016}. Dit leidt vaak tot complexe procesmodellen die moeilijk leesbaar zijn, waardoor interpretatie van de resultaten bemoeilijkt wordt. In de literatuur wordt dit probleem onder andere verklaard door het ontbreken van geschikte abstractieniveaus in process mining modellen \autocite{Jagadeesh2009}. Hierdoor wordt het analyseren van klantinteracties en het identificeren van structurele inefficiënties aanzienlijk bemoeilijkt.
 % Hier beschrijf je de \emph{state-of-the-art} rondom je gekozen onderzoeksdomein, d.w.z.\ een inleidende, doorlopende tekst over het onderzoeksdomein van je bachelorproef. Je steunt daarbij heel sterk op de professionele \emph{vakliteratuur}, en niet zozeer op populariserende teksten voor een breed publiek. Wat is de huidige stand van zaken in dit domein, en wat zijn nog eventuele open vragen (die misschien de aanleiding waren tot je onderzoeksvraag!)?
 
 % Je mag de titel van deze sectie ook aanpassen (literatuurstudie, stand van zaken, enz.). Zijn er al gelijkaardige onderzoeken gevoerd? Wat concluderen ze? Wat is het verschil met jouw onderzoek?
@@ -125,6 +132,17 @@ Het onderzoek maakt gebruik van:
   \item \textbf{Week 13:} Eindpresentatie en afronding van de bachelorproef.
 \end{itemize}
 %---------- Verwachte resultaten ----------------------------------------------
-\section{Verwacht resultaat, conclusie}%
+\section{Verwachte resultaten}%
 \label{sec:verwachte_resultaten}
+
+De bachelorproef zal naar verwachting resultern in:
+\begin{itemize}
+  \item Een overzicht van de belangrijkste Genesys-interactieflows op basis van logdata.
+  \item Een visuele weergave van de meest voorkomende paden en afwijkingen.
+  \item Een technische proof-of-concept of prototype dat loggegevens omzet naar een interpreteerbare flowvisualisatie
+\end{itemize}
+Daarnaast wordt verwacht dat de uitwerking handvatten biedt voor verder optimalisatie van monitoring en troubleschooting binnen de callcenteromgeving.
+\section{Verwachte conclusie}
+\label{sec:verwachte_conclusie}
+Verwacht wordt dat een gestructureerde analyse van Splunk-logbestanden voldoende informatie oplevert om de belangrijkste Genesys-flows te reconstrueren en afwijkingen zichtbaar te maken. De studie zal waarschijnlijk aantonen dat niet alleen de flow zelf maar ook de context van een afwijking essentieel is om de juiste interpretatie te maken. De uiteindelijke meerwaarde ligt in een beter begrip van de praktijkwerking en in een technische bruikbaar hulpmiddel voor vervolgonderzoek of procesverbetering.
 
