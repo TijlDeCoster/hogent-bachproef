@@ -14,15 +14,14 @@
 
 \section{Inleiding}%
 \label{sec:inleiding}
-Deze bachelorproef richt zich op het analyseren en visualiseren van klantpaden binnen de lokaal draaiende Genesys-omgeving van Proximus. Dit richt zich specifiek op de interne klant van Proximus die de Genesys-omgeving beheert.
+Binnen Proximus ondersteund de Genesys-omgeving de afhandeling van klantinteracties in het callcenter en communicatie platform. Deze interacties verlopen via meerde kanalen en kunnen volgens uiteenlopende scenario's evolueren, afhankelijk van de gegevens die een klant aanlevert of opgehaald worden intern. Hierdoor ontstaat een complex proces waarin vergelijkbare gesprekken niet noodzakelijk dezelfde stappen doorlopen. Dit maakt het waardevol om de volledige conversatiestroom systematisch in kaart te brengen en te analyseren.
 
-De centrale probleemstelling is dat Proximus ondanks uitgebreide logging in Splunk onvoldoende inzicht heeft in hoe klanten deze flows daadwerkelijk doorlopen. De bestaande logbestanden zijn operationeel van aard en niet ontworpen om automatisch de volledig flowstructuur te reconstrueren. Hierdoor blijft onduidelijkheid waar klanten afhaken, waar fouten optreden en welke stappen structureel inefficiënt zijn wat ook bevestigd word in academische literatuur over IVR-analyse en process mining \autocite{Ellway2016,Antonio2024}.
+Hoewel Proximus uitgebreide logging verzamelt in Splunk is het vandaag niet vanzelfsprekend om deze data te vertalen naar een heldere overzicht van de volledige interacties. De beschikbare logbestanden bevatten wel veel informatie over afzondelijke uitvoeringsstappen maar zijn operationeel van aard en niet ontworpen om automatisch de volledige flowstructuur te reconstrueren. Daardoor blijft ondeuidelijk waar klanten afhaken, waar fouten optreden en welke stappen structureel inefficiënt. Een probleem dat ook wordt bevestigd in academische litartuur over IVR-analyse en process mining \autocite{Ellway2016,Antonio2024}. Dit onderzoek vertrekt daarom vanuit de vraag hoe zulke interacties beter zichtbaar en interpreteerbaar kunnen worden gemaakt.
 
 \paragraph{Centrale onderzoeksvraag}
-Hoe kan een reproduceerbare methode ontwikkeld worden om alle mogelijke paden binnen de lokale Genesys-flows van Proximus te visualiseren en te analyseren, zodat drop-off punten, foutpaden en inefficiënte stappen kunnen worden geïdentificeerd?
-
+Hoe kan een reproduceerbare methode worden ontwikkeld om alle mogelijke paden binnen de lokale Gensys-flows van Proximus te visualiseren en te analyseren zodat drop-offpunten, foutpadden en inefficiënte stappen kunnen worden geïdentificeerd?
 \paragraph{Onderzoeksdoelstelling}
-Het doel van dit onderzoek is het ontwikkelen van een proof-of-concept dat Splunk-logs omzet in werkelijke klantpaden binnen de Genesys-omgeving van Proximus. Deze gereconstrueerde paden worden vervolgens geclusterd tot standaarflows zodat afwijkingen, inefficiënties en foutpadden kunnen worden gedetecteerd. Het prototpye moet inzicht bieden in de volledige flowstructuur en ondersteuning bieden bij het verbeteren van efficiëntie en nauwkeurigheid.
+Het doel van dit onderzoek is het ontwikkelen van een proof-of-concept dat Splunk-logs omzet in gereconstrueerde klantpadden binnen de Genesys-omgeving van Proximus. Deze paden worden vervolgens geclusterd tot standaardflows zodat afwijkingen, ineffici*enties en foutpaden kunnen worden gedetecteerd. Het prototype moet inzicht bieden in de volledige flowstuctuur en ondersteuning bieden bij het verbeteren van efficiëntie en nauwkeurigheid.
 \paragraph{Deelvragen probleemdomein}
 \begin{itemize}
   \item Welke soorten interacties en events worden door Proximus gelogd in Splunk en hoe verhouden deze zich tot de onderliggende Genesys-flows?
@@ -36,6 +35,7 @@ Het doel van dit onderzoek is het ontwikkelen van een proof-of-concept dat Splun
   \item Hoe kunnen afwijkende paden, foutpaden en inefficiënte stappen automatisch worden gedetecteerd op basis van clusters?
   \item Welke visualisatietechnieken zijn het meest geschikt om zowel standaardflows als afwijkende paden inzichtelijk te maken?
 \end{itemize}
+
 %---------- Stand van zaken ---------------------------------------------------
 
 
