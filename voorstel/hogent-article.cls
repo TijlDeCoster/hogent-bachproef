@@ -253,7 +253,14 @@
 % default settings, we get a lot of overfull \hbox warnings and text overflowing
 % in the margin on the right. Setting \tolerance to a higher value than the
 % default (200) improves the result.
-\tolerance 1000
+\usepackage{microtype}
+\tolerance=800
+\emergencystretch=2em
+\hyphenpenalty=5000
+\exhyphenpenalty=5000
+
+
+
 
 %% -----------------------------------------------------------------------------
 %% Title
