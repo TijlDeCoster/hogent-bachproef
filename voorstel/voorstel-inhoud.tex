@@ -16,12 +16,12 @@
 \label{sec:inleiding}
 Binnen Proximus ondersteund de Genesys-omgeving de afhandeling van klantinteracties in de omnichannel omgeving (telefoon, chat, berichtplatform). Deze interacties verlopen via meerde kanalen en kunnen volgens uiteenlopende scenario's evolueren, afhankelijk van de gegevens die een klant aanlevert of opgehaald worden intern. Hierdoor ontstaat een complex proces waarin vergelijkbare gesprekken niet noodzakelijk dezelfde stappen doorlopen. Dit maakt het waardevol om de volledige conversatiestroom systematisch in kaart te brengen en te analyseren.
 
-Hoewel Proximus uitgebreide logging verzamelt in Splunk is het vandaag niet vanzelfsprekend om deze data te vertalen naar een heldere overzicht van de volledige interacties. De beschikbare logbestanden bevatten wel veel informatie over afzondelijke uitvoeringsstappen maar zijn operationeel van aard en niet ontworpen om automatisch de volledige flowstructuur te reconstrueren. Daardoor blijft ondeuidelijk waar klanten afhaken, waar fouten optreden en welke stappen structureel inefficiënt. Een probleem dat ook wordt bevestigd in academische litartuur over IVR-analyse en process mining \autocite{Ellway2016,Antonio2024}. Dit onderzoek vertrekt daarom vanuit de vraag hoe zulke interacties beter zichtbaar en interpreteerbaar kunnen worden gemaakt.
+Hoewel Proximus uitgebreide logging verzamelt in Splunk is het vandaag niet vanzelfsprekend om deze data te vertalen naar een heldere overzicht van de volledige interacties. De beschikbare logbestanden bevatten wel veel informatie over afzondelijke uitvoeringsstappen, maar zijn operationeel van aard en niet ontworpen om automatisch de volledige flowstructuur te reconstrueren. Daardoor blijft onduidelijk waar klanten afhaken, waar fouten optreden en welke stappen structureel inefficiënt zijn. Een probleem dat ook wordt bevestigd in academische litartuur over IVR-analyse en process mining \autocite{Ellway2016,Antonio2024}. Dit onderzoek vertrekt daarom vanuit de vraag hoe zulke interacties beter zichtbaar en interpreteerbaar kunnen worden gemaakt.
 
 \paragraph{Centrale onderzoeksvraag}
 Hoe kan een reproduceerbare methode worden ontwikkeld om alle mogelijke paden binnen de lokale Gensys-flows van Proximus te visualiseren en te analyseren zodat drop-offpunten, foutpadden en inefficiënte stappen kunnen worden geïdentificeerd?
 \paragraph{Onderzoeksdoelstelling}
-Het doel van dit onderzoek is het ontwikkelen van een proof-of-concept dat Splunk-logs omzet in gereconstrueerde klantpadden binnen de Genesys-omgeving van Proximus. Deze paden worden vervolgens geclusterd tot standaardflows zodat afwijkingen, ineffici*enties en foutpaden kunnen worden gedetecteerd. Het prototype moet inzicht bieden in de volledige flowstuctuur en ondersteuning bieden bij het verbeteren van efficiëntie en nauwkeurigheid.
+Het doel van dit onderzoek is het ontwikkelen van een proof-of-concept dat Splunk-logs omzet in gereconstrueerde klantpadden binnen de Genesys-omgeving van Proximus. Deze paden worden vervolgens geclusterd tot standaardflows zodat afwijkingen, ineffici*enties en foutpaden kunnen worden gedetecteerd. Het prototype moet inzicht bieden in de volledige flowstuctuur en ondersteuning bieden bij het verbeteren van effici\"entie en nauwkeurigheid.
 \paragraph{Deelvragen probleemdomein}
 \begin{itemize}
   \item Welke soorten interacties en events worden door Proximus gelogd in Splunk en hoe verhouden deze zich tot de onderliggende Genesys-flows?
@@ -42,11 +42,11 @@ Het doel van dit onderzoek is het ontwikkelen van een proof-of-concept dat Splun
 \section{Literatuurstudie}%
 \label{sec:literatuurstudie}
 
-Moderne contactcenters evolueren naar complexe omnichannelomgevingen waarin klantinteracties plaatsvinden via verschillende kanalen zoals chat, berichten en telefonie. Deze interacties verlopen niet altijd volgens vooraf gedefinieerde lineaire processen maar worden gekenmerkt door een hoge mate van variabiliteit. Volgens \textcite{Ellway2016} kan deze variabiliteit leiden tot inefficiënties binnen de interne werking van contactcenters bijvoorbeeld door foutive doorverwijzingen of onverwachte interactiestromen. Dit toont aan dat de feitelijke uitvoering van klantinteracties vaak afwijkt van het ontworpen proces.
+Moderne contactcenters evolueren naar complexe omnichannelomgevingen waarin klantinteracties plaatsvinden via verschillende kanalen zoals chat, berichten en telefonie. Deze interacties verlopen niet altijd volgens vooraf gedefinieerde lineaire processen maar worden gekenmerkt door een hoge mate van variabiliteit. Volgens \textcite{Ellway2016} kan deze variabiliteit leiden tot inefficiënties binnen de interne werking van contactcenters bijvoorbeeld door foutieve doorverwijzingen of onverwachte interactiestromen. Dit toont aan dat de feitelijke uitvoering van klantinteracties vaak afwijkt van het ontworpen proces.
 
-Daarnaast speelt klantgedrag een belangrijke rol in het verloop van interacties. \textcite{Antonio2024} beschrijven het fenomeen van "silent abandonment" waarbij klanten een interactie verlaten zonder expliciete afsluiting. Dit maakt het moeilijk om op basis van ruwe eventdata correct te bepalen waar en waarom klanten afhaken. Dergelijke situaties komen niet enkel voor in telefonie maar ook in tekstgebaseerde communicatiekanalen waar gebruikers eenvoudig een gesprk kunnen verlaten zonder duidelijke indicatie.
+Daarnaast speelt klantgedrag een belangrijke rol in het verloop van interacties. \textcite{Antonio2024} beschrijven het fenomeen van "silent abandonment" waarbij klanten een interactie verlaten zonder expliciete afsluiting. Dit maakt het moeilijk om op basis van ruwe eventdata correct te bepalen waar en waarom klanten afhaken. Dergelijke situaties komen niet enkel voor in telefonie maar ook in tekstgebaseerde communicatiekanalen waar gebruikers eenvoudig een gesprek kunnen verlaten zonder duidelijke indicatie.
 
-Om inzicht te krijgen in deze complexe en dynamische interacties biedt process mining een relevante analysemethode. Volgens \textcite{vanDerAalst2016} maakt process mining het mogelijk om op basis van event logs de werkelijke processtromen te recontrueren en te analyseren. Hierdoor kunnen zowel standaardprocessen als afwijkende paden en inefficiënties worden geïdentificeerd. Deze benadering is bijzonder nuttig in omgevingen waar grote hoeveelheden interactiedata beschikbaar zijn.
+Om inzicht te krijgen in deze complexe en dynamische interacties biedt process mining een relevante analysemethode. Volgens \textcite{vanDerAalst2016} maakt process mining het mogelijk om op basis van event logs de werkelijke processtromen te reconstrueren en te analyseren. Hierdoor kunnen zowel standaardprocessen als afwijkende paden en inefficiënties worden geïdentificeerd. Deze benadering is bijzonder nuttig in omgevingen waar grote hoeveelheden interactiedata beschikbaar zijn.
 
 De toepassing van dergelijke technieken binnen omnichannel contactcenters brengt echter bijkomende uitdagingen met zich mee. Door de hoge variabiliteit in interactiepaden en het ontbreken van expliciete processtructuren is het moeilijk om eenduidige en interpreteerbare modellen te reconstrueren \autocite{Ellway2016, vanDerAalst2016}. Dit leidt vaak tot complexe procesmodellen die moeilijk leesbaar zijn, waardoor interpretatie van de resultaten bemoeilijkt wordt. In de literatuur wordt dit probleem onder andere verklaard door het ontbreken van geschikte abstractieniveaus in process mining modellen \autocite{Jagadeesh2009}. Hierdoor wordt het analyseren van klantinteracties en het identificeren van structurele inefficiënties aanzienlijk bemoeilijkt.
 % Hier beschrijf je de \emph{state-of-the-art} rondom je gekozen onderzoeksdomein, d.w.z.\ een inleidende, doorlopende tekst over het onderzoeksdomein van je bachelorproef. Je steunt daarbij heel sterk op de professionele \emph{vakliteratuur}, en niet zozeer op populariserende teksten voor een breed publiek. Wat is de huidige stand van zaken in dit domein, en wat zijn nog eventuele open vragen (die misschien de aanleiding waren tot je onderzoeksvraag!)?
@@ -81,7 +81,7 @@ Om de vragen in het probleemdomein te beantwoorden wordt er een gerichte literat
   \item clusteringtechnieken voor sequentiële data
   \item grafmodellen voor flowvisualisatie
 \end{itemize}
-Deze stude dient om bestaande methoden en relevante concepten te identificeren. De literatuur vormt de theoretische basis voor de ontwerpkeuzes in het proof-of-concept.
+Deze studie dient om bestaande methoden en relevante concepten te identificeren. De literatuur vormt de theoretische basis voor de ontwerpkeuzes in de proof-of-concept.
 \paragraph{Analyse en voorbereiding van Splunk-logs}
 De Splunk-logs van Proximus worden geanalyseerd om te bepalen:
 \begin{itemize}
@@ -96,7 +96,7 @@ De Splunk-logs van Proximus worden geanalyseerd om te bepalen:
 \paragraph{Ontwikkeling van een flowreconstructiemethode (Proof-of-Concept)}
 In deze fase wordt een proof-of-concept ontwikkeld dat:
 \begin{itemize}
-  \item Werkelijke klantpadden reconstrueert uit Spluk-logs
+  \item Werkelijke klantpadden reconstrueert uit Splunk-logs
   \item paden clustert tot standaardflows
   \item afwijkende paden, foutpaden en inefficiënte stappen visualiseerd
 \end{itemize}
