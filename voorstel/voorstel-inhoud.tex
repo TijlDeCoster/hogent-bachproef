@@ -14,23 +14,23 @@
 
 \section{Inleiding}%
 \label{sec:inleiding}
-Binnen Proximus ondersteund de Genesys-omgeving de afhandeling van klantinteracties in de omnichannel omgeving (telefoon, chat, berichtplatform). Deze interacties verlopen via meerde kanalen en kunnen volgens uiteenlopende scenario's evolueren, afhankelijk van de gegevens die een klant aanlevert of opgehaald worden intern. Hierdoor ontstaat een complex proces waarin vergelijkbare gesprekken niet noodzakelijk dezelfde stappen doorlopen. Dit maakt het waardevol om de volledige conversatiestroom systematisch in kaart te brengen en te analyseren.
+Binnen Proximus ondersteund het Genesys platform de afhandeling van klantinteracties in de omnichannel omgeving (telefoon, chat, berichtplatform). Moderne contactcenters stellen organisaties in staat om klanten via verschillende kanalen te bedienen en gepersonaliseerde interacties aan te bieden. Deze interacties verlopen echter niet volgens strikt lineaire processen maar evolueren dynmaisch afhankelijk van klantgedrag en beschikbare data. Hierdoor ontstaat een complex proces waarin vergelijkbare gesprekken niet noodzakelijk dezelfde stappen doorlopen. Dit maakt het waardevol om de volledige conversatiestroom systematisch in kaart te brengen en te analyseren.
 
-Hoewel Proximus uitgebreide logging verzamelt in Splunk is het vandaag niet vanzelfsprekend om deze data te vertalen naar een heldere overzicht van de volledige interacties. De beschikbare logbestanden bevatten wel veel informatie over afzondelijke uitvoeringsstappen, maar zijn operationeel van aard en niet ontworpen om automatisch de volledige flowstructuur te reconstrueren. Daardoor blijft onduidelijk waar klanten afhaken, waar fouten optreden en welke stappen structureel inefficiënt zijn. Een probleem dat ook wordt bevestigd in academische litartuur over IVR-analyse en process mining \autocite{Ellway2016,Antonio2024}. Dit onderzoek vertrekt daarom vanuit de vraag hoe zulke interacties beter zichtbaar en interpreteerbaar kunnen worden gemaakt.
+Hoewel Proximus uitgebreide logging verzamelt van het contactcenterplatform, gecentraliseerd in Splunk, is het vandaag niet vanzelfsprekend om deze data te vertalen naar een heldere overzicht van de volledige interacties. De beschikbare logbestanden bevatten wel veel informatie over afzondelijke uitvoeringsstappen, maar zijn operationeel van aard en niet ontworpen om automatisch de volledige flowstructuur te reconstrueren. Daardoor blijft onduidelijk waar klanten afhaken, waar fouten optreden en welke stappen structureel inefficiënt zijn. Een probleem dat ook wordt bevestigd in academische litartuur over IVR-analyse en process mining \autocite{Ellway2016,Antonio2024}. Dit onderzoek vertrekt daarom vanuit de vraag hoe zulke interacties beter zichtbaar en interpreteerbaar kunnen worden gemaakt.
 
 \paragraph{Centrale onderzoeksvraag}
 Hoe kan een reproduceerbare methode worden ontwikkeld om alle mogelijke paden binnen de lokale Gensys-flows van Proximus te visualiseren en te analyseren zodat drop-offpunten, foutpadden en inefficiënte stappen kunnen worden geïdentificeerd?
 \paragraph{Onderzoeksdoelstelling}
-Het doel van dit onderzoek is het ontwikkelen van een proof-of-concept dat Splunk-logs omzet in gereconstrueerde klantpadden binnen de Genesys-omgeving van Proximus. Deze paden worden vervolgens geclusterd tot standaardflows zodat afwijkingen, ineffici\"enties en foutpaden kunnen worden gedetecteerd. Het prototype moet inzicht bieden in de volledige flowstuctuur en ondersteuning bieden bij het verbeteren van effici\"entie en nauwkeurigheid.
+Het doel van dit onderzoek is het ontwikkelen van een proof-of-concept dat contactcenter-logdata omzet in gereconstrueerde klantpaden binnen de Genesys-omgeving van Proximus. Deze paden worden vervolgens geclusterd tot standaardflows zodat afwijkingen, ineffici\"enties en foutpaden kunnen worden gedetecteerd. Het prototype moet inzicht bieden in de volledige flowstuctuur en ondersteuning bieden bij het verbeteren van effici\"entie en nauwkeurigheid.
 \paragraph{Deelvragen probleemdomein}
 \begin{itemize}
-  \item Welke soorten interacties en events worden door Proximus gelogd in Splunk en hoe verhouden deze zich tot de onderliggende Genesys-flows?
+  \item Welke soorten interacties en events worden gelogd in Splunk en hoe verhouden deze zich tot de onderliggende Genesys-flows?
   \item Welke datakwaliteitsproblemen (zoals ontbrekende events, inconsistenties of timingverschillen) bemoeilijken het reconstrueren van klantpaden?
 \end{itemize}
 
 \paragraph{Deelvragen oplossingsdomein}
 \begin{itemize}
-  \item Hoe kunnen Splunk-logs gestructureerd en verwerkt worden om volledige klantpaden automatisch te reconstrueren?
+  \item Hoe kunnen contactcenter-logdata gestructureerd en verwerkt worden om volledige klantpaden automatisch te reconstrueren?
   \item Welke analysetechnieken of algoritmen zijn geschikt om alle mogelijke paden binnen een Genesys-flow te reconstrueren?
   \item Hoe kunnen afwijkende paden, foutpaden en inefficiënte stappen automatisch worden gedetecteerd op basis van clusters?
   \item Welke visualisatietechnieken zijn het meest geschikt om zowel standaardflows als afwijkende paden inzichtelijk te maken?
@@ -71,7 +71,7 @@ De toepassing van dergelijke technieken binnen omnichannel contactcenters brengt
 %---------- Methodologie ------------------------------------------------------
 \section{Methodologie}%
 \label{sec:methodologie}
-Dit onderzoek volgt een experimentele en data-gedreven aanpak. Het doel is om Splunk-logs om te zetten in werkelijke klantpaden, deze paden te clusteren tot standaardflows en vervolgens afwijkingen en inefficiënties te analyseren. 
+Dit onderzoek volgt een experimentele en data-gedreven aanpak. Het doel is om contactcenter-logdata, afkomstig van het Genesys-platform en gecentraliseerd in splunk om te zetten in werkelijke klantpaden, deze paden te clusteren tot standaardflows en vervolgens afwijkingen en inefficiënties te analyseren. 
 \paragraph{Literatuurstudie}
 Om de vragen in het probleemdomein te beantwoorden wordt er een gerichte literatuurstudie uitgevoerd naar:
 \begin{itemize}
@@ -82,11 +82,11 @@ Om de vragen in het probleemdomein te beantwoorden wordt er een gerichte literat
   \item grafmodellen voor flowvisualisatie
 \end{itemize}
 Deze studie dient om bestaande methoden en relevante concepten te identificeren. De literatuur vormt de theoretische basis voor de ontwerpkeuzes in de proof-of-concept.
-\paragraph{Analyse en voorbereiding van Splunk-logs}
-De Splunk-logs van Proximus worden geanalyseerd om te bepalen:
+\paragraph{Analyse en voorbereiding van logdata}
+De contactcenter-logdata word geanalyseerd:
 \begin{itemize}
   \item welke events relevant zijn voor flowstappen
-  \item hoe events kunnen worden gegroepeerd tot klanttransacites
+  \item hoe events kunnen worden gegroepeerd tot klanttransacties
   \item welke datakwaliteitsproblemen aanwezig zijn
 \end{itemize}
 
@@ -96,13 +96,13 @@ De Splunk-logs van Proximus worden geanalyseerd om te bepalen:
 \paragraph{Ontwikkeling van een flowreconstructiemethode (Proof-of-Concept)}
 In deze fase wordt een proof-of-concept ontwikkeld dat:
 \begin{itemize}
-  \item Werkelijke klantpadden reconstrueert uit Splunk-logs
+  \item Werkelijke klantpadden reconstrueert uit contactcenter-logdata
   \item paden clustert tot standaardflows
-  \item afwijkende paden, foutpaden en inefficiënte stappen visualiseerd
+  \item afwijkende paden, foutpaden en inefficiënte stappen visualiseert
 \end{itemize}
 Onderzoekstechnieken:
 \begin{itemize}
-  \item algoritmen-ontwerp voor padreconstructie
+  \item algoritme-ontwerp voor padreconstructie
   \item grafmodellering
   \item clustering van sequenties
 \end{itemize}
@@ -113,7 +113,7 @@ De ontwikkelde methode wordt geëvalueerd op basis van correctheid, compleetheid
 \paragraph{Tools en technologieën}
 Het onderzoek maakt gebruik van:
 \begin{itemize}
-  \item Cisco Splunk voor logverwerking
+  \item Splunk voor centrale logverzameling en -toegang
   \item Python
   \item Jupyter Notebooks voor experimentatie
   \item Git voor versiebeheer
@@ -122,7 +122,7 @@ Het onderzoek maakt gebruik van:
 \paragraph{Tijdsplanning en deliverables (13 weken)}
 \begin{itemize}
   \item \textbf{Week 1--2:} Literatuurstudie
-  \item \textbf{Week 3:} Verzameling en eerste verkenning van Splunk-logs.
+  \item \textbf{Week 3:} Verzameling en eerste verkenning van logdata via Splunk.
   \item \textbf{Week 4--5:} Datapreprocessing en structurering van logs tot klanttransacties.
   \item \textbf{Week 6--7:} Ontwikkeling van algoritmen voor padreconstructie.
   \item \textbf{Week 8:} Clustering van gereconstrueerde klantpaden tot standaardflows.
@@ -144,5 +144,5 @@ De bachelorproef zal naar verwachting resultern in:
 Daarnaast wordt verwacht dat de uitwerking handvatten biedt voor verder optimalisatie van monitoring en troubleschooting binnen de callcenteromgeving.
 \section{Verwachte conclusie}
 \label{sec:verwachte_conclusie}
-Verwacht wordt dat een gestructureerde analyse van Splunk-logbestanden voldoende informatie oplevert om de belangrijkste Genesys-flows te reconstrueren en afwijkingen zichtbaar te maken. De studie zal waarschijnlijk aantonen dat niet alleen de flow zelf maar ook de context van een afwijking essentieel is om de juiste interpretatie te maken. De uiteindelijke meerwaarde ligt in een beter begrip van de praktijkwerking en in een technische bruikbaar hulpmiddel voor vervolgonderzoek of procesverbetering.
+Verwacht wordt dat een gestructureerde analyse van het contactcenter-logdata voldoende informatie oplevert om de belangrijkste Genesys-flows te reconstrueren en afwijkingen zichtbaar te maken. De studie zal waarschijnlijk aantonen dat niet alleen de flow zelf maar ook de context van een afwijking essentieel is om de juiste interpretatie te maken. De uiteindelijke meerwaarde ligt in een beter begrip van de praktijkwerking en in een technische bruikbaar hulpmiddel voor vervolgonderzoek of procesverbetering.
 
